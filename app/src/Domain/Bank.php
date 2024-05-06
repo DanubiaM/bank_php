@@ -1,13 +1,12 @@
 <?php
+namespace Bank\Mace\Domain;
 
 class Bank{
 
-    private $account = array();
 
-    function __construct(string $name)
-    {
-        
-    }
+    private $account = array();
+    const NAME = 'Mace Bank';
+    
 
     function newAccount(Account $accountNew){
         array_push($this->account,  [$accountNew]);        

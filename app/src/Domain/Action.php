@@ -1,4 +1,6 @@
 <?php
+namespace Bank\Mace\Domain;
+
 enum  ACTION: string {
 
     case WITHDRAWL = "A withdrawal was made from your bank account.";

@@ -1,0 +1,19 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-bank
+    restart: always
+    ports:
+    - "80:80"
+    volumes:
+    - ./app:/var/www/html/
+    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+  php:
+    container_name: php-bank
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    volumes:
+    - ./app:/var/www/html/

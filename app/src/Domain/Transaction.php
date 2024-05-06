@@ -1,7 +1,9 @@
 <?php
+namespace Bank\Mace\Domain;
+
+
 use Ramsey\Uuid\Uuid;
 
-require 'BasicTransaction.php';
 
 class Transaction{
     use BasicTransaction;

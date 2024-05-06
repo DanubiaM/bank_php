@@ -1,15 +1,15 @@
 <?php
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
-
-require 'Bank.php';
-require 'Account.php';
-require 'Customer.php';
-require "Transaction.php";
-
+use Bank\Mace\Model\Account;
+use Bank\Mace\Model\Bank;
+use Bank\Mace\Model\Customer;
+use Bank\Mace\Model\Transaction;
 use Ramsey\Uuid\Uuid;
 
+
+//TODO: Implementar testes unitários em PHP
 
 // Instancia um  banco
 $banco = new Bank("PHP Bank");

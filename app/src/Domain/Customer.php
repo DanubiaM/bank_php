@@ -1,5 +1,6 @@
 <?php
-require 'vendor/autoload.php';
+namespace Bank\Mace\Domain;
+
  
 use Ramsey\Uuid\Uuid; 
 

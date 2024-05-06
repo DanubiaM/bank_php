@@ -1,6 +1,7 @@
 <?php
+namespace Bank\Mace\Domain;
 
-require 'Action.php';
+
 
 class Account{
 
@@ -30,7 +31,8 @@ class Account{
     function withdrawal(float $amount){
 
         if($amount > $this->balance){
-            throw new ErrorException("Balance account [$this->balance] is smaller than $amount");
+            echo("Balance account [$this->balance] is smaller than $amount");
+            exit;
         }
     
     
