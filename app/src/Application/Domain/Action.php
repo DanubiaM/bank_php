@@ -1,5 +1,5 @@
 <?php
-namespace Bank\Mace\Domain;
+namespace Bank\Mace\Application\Domain;
 
 enum  ACTION: string {
 
