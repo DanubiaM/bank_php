@@ -94,9 +94,6 @@ class Controller {
 
         $idAccount = $args["idAccount"];
 
-        // GET ACCOUNT BY REPOSITORY
-        // CALL FUNCTION GET ALL STATEMENT
-        // SAVE IN DATABASE
         
         $this->usecase->statement($idAccount);
 
@@ -111,12 +108,9 @@ class Controller {
      */
     public function balance($request,$response, $args){
 
-        $customerId = $args["idAccount"];
-
-        // GET ACCOUNT BY REPOSITORY
-        // CALL FUNCTION TO SHOW BALANCEs
-        // SAVE IN DATABASE
-        
+        $idAccount = $args["idAccount"];
+       
+        $this->usecase->balance($idAccount);
 
 
         $response->getBody()->write("Sucessful deposit");
@@ -133,31 +127,11 @@ class Controller {
         $json= $request->getBody();
         $data = json_decode($json, true); 
 
-        // GET ACCOUNT A AND B BY REPOSITORY
-        // INSTANCE TRANSACTION
-        // SAVE IN DATABASE
-        
-
-
+        $this->usecase->makeTransaction($data["account-sender"], $data["account-receiver"], $data["amount"]);
+     
         $response->getBody()->write("Sucessful deposit");
         
         return $response;
     }
 
-     /**
-     * @GET
-     */
-    public function bankTransactonalHistory($request,$response, $args){
-
-
-        // GET transactions from the bank
-        // CALL FUNCTION TO SHOW transactions
-        // SAVE IN DATABASE
-        
-
-
-        $response->getBody()->write("Sucessful deposit");
-        
-        return $response;
-    }
 }
