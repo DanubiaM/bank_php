@@ -16,5 +16,4 @@ $app->post('/deposit', function ($req, $res, $args) {return Controller::instance
 $app->get('/statement/$idAccount', function ($req, $res, $args) {return Controller::instance()->statement($req, $res,$args);});
 $app->get('/balance/$idAccount', function ($req, $res, $args) {return Controller::instance()->balance($req, $res,$args);});
 $app->post('/transaction', function ($req, $res, $args) {return Controller::instance()->transaction($req, $res,$args);});
-$app->get('/transactional-history-bank', function ($req, $res, $args) {return Controller::instance()->bankTransactonalHistory($req, $res,$args);});
 

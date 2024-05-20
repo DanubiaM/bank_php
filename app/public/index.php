@@ -1,11 +1,18 @@
 <?php
+
 use Slim\Factory\AppFactory;
+use DI\Container;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/Infrastructure/config/settings.php';
 
+$container = new Container($settings);
+
+AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 require __DIR__ . '/../src/Infrastructure/routes.php';
+require __DIR__ . '/../src/Infrastructure/database.php';
 
 
 $app->run();
