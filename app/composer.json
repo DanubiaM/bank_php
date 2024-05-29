@@ -2,12 +2,21 @@
     "require": {
         "ramsey/uuid": "^4.7",
         "slim/slim": "4.*",
-        "slim/psr7": "^1.4"
+        "slim/psr7": "^1.4",
+        "php-di/php-di": "^7.0",
+        "doctrine/orm": "^3.1",
+        "symfony/cache": "^7.0",
+        "doctrine/annotations": "^2.0"
 
     },
     "autoload":{
         "psr-4": {
             "Bank\\Mace\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
         }
     }
 }
