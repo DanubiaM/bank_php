@@ -17,3 +17,17 @@ services:
       context: .
     volumes:
     - ./app:/var/www/html/
+  mysql:
+    container_name: mysql
+    image: mysql:lts
+    restart: always
+    ports:
+       - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_PASSWORD: '1234'
+      MYSQL_USER: 'sa'
+      MYSQL_DATABASE: 'bank'
+
+    volumes:
+      - ./db/:/var/lib/mysql
