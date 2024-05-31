@@ -1,5 +1,5 @@
 <?php
-namespace Bank\Mace\Infrastructure;
+namespace Bank\Mace\Infrastructure\Config;
 
 use Bank\Mace\Infrastructure\Controller;
 

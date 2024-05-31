@@ -1,7 +1,7 @@
 <?php
 namespace Bank\Mace\Application\Domain;
 
-class Bank{
+class Bank implements AggregateRoot{
 
 
     private $account = array();

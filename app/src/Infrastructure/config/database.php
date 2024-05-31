@@ -1,4 +1,5 @@
 <?php
+namespace Bank\Mace\Infrastructure\Config;
 
 use DI\Container;
 use Doctrine\DBAL\DriverManager;

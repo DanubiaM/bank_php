@@ -3,7 +3,7 @@ namespace Bank\Mace\Application\Domain;
 
 
 
-class Account{
+class Account implements AggregateRoot{
 
     public string $id ;
     public string $clientId;

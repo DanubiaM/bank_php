@@ -1,8 +1,8 @@
 <?php
+namespace Bank\Mace\Infrastructure\Config;
 
 
-
-return  [
+$settings =  [
     'doctrine' => [
         // Enables or disables Doctrine metadata caching
         // for either performance or convenience during development.
@@ -33,3 +33,6 @@ return  [
         ]
     ]
 ];
+
+
+return $settings;

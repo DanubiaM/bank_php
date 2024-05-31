@@ -5,7 +5,7 @@ namespace Bank\Mace\Application\Domain;
 use Ramsey\Uuid\Uuid;
 
 
-class Transaction{
+class Transaction implements AggregateRoot{
     use BasicTransaction;
 
     private $historyTransaction = [];

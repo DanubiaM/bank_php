@@ -11,8 +11,8 @@ $container = new Container($settings);
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-require __DIR__ . '/../src/Infrastructure/routes.php';
-require __DIR__ . '/../src/Infrastructure/database.php';
+require __DIR__ . '/../src/Infrastructure/config/routes.php';
+require __DIR__ . '/../src/Infrastructure/config/database.php';
 
 
 $app->run();
