@@ -3,42 +3,29 @@ namespace Bank\Mace\Infrastructure\Model;
 
 use Bank\Mace\Application\Domain\AggregateRoot;
 use DateTime;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
 
-/**
- * @Entity @Table(name="Customer")
- **/
-final class CustomerModel{
+#[Entity, Table(name:'Customer')]
+final class CustomerModel implements Model{
     
-    /**
-     * @var int
-     * @Id @Column(type="integer") 
-     * @GeneratedValue
-     */
+    #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     public $id;
 
 
-    /**
-     * @var string
-     * @Column(type="string") 
-     */
+    #[Column(name: 'name', type: 'string', length: 60, nullable: false)]
     public $name;
 
-    /**
-     * @var string
-     * @Column(type="string") 
-     */
+    #[Column(name: 'phone', type: 'string', length: 60, nullable: false)]
     public $phone;
 
-    /**
-     * @var string
-     * @Column(type="string") 
-     */
+    #[Column(name: 'address', type: 'string', length: 60, nullable: false)]
     public $address;
 
-    /**
-     * @var string
-     * @Column(type="date") 
-     */
+    #[Column(name: 'create_at', type: 'datetime', nullable: false)]
     public DateTime $creatAt;
 
 
@@ -53,10 +40,9 @@ final class CustomerModel{
     }
 
  
-    public static function fromEntity(AggregateRoot $entity){
- 
+    public static function fromEntity(AggregateRoot $entity){ 
         
-        return new self($entity->getName(), $entity->getPhone(), $entity->getAddress());
+        return new self($entity->getId(),$entity->getName(), $entity->getPhone(), $entity->getAddress());
 
     }
 

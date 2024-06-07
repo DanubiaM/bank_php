@@ -1,14 +1,16 @@
 <?php
 namespace Bank\Mace\Infrastructure\Config;
 
+use Bank\Mace\Infrastructure\Model\CustomerModel;
 use DI\Container;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-$container->set(EntityManager::class, static function (Container $c): EntityManager {
+$container->set('entityManager', static function (Container $c): EntityManager {
 
     $settings = $c->get('settings');
 
@@ -26,7 +28,14 @@ $container->set(EntityManager::class, static function (Container $c): EntityMana
 
     
     $connection = DriverManager::getConnection($settings['doctrine']['connection'], $config);
-    return  new EntityManager($connection, $config);
+
+    $em = new EntityManager($connection, $config);
+
+    // $schemaTool = new SchemaTool($em);
+
+    // $schemaTool->createSchema([$em->getClassMetadata(CustomerModel::class)]);
+
+    return  $em;
 
 });
 

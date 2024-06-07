@@ -10,13 +10,13 @@ class Controller {
 
     private UseCaseInterface $usecase;
 
-    public function __construct(){
-        $this->usecase =  new UseCase();
+    public function __construct(UseCase $useCase){
+        $this->usecase =  $useCase;
     }
     
-    public static function instance (){
+    public static function instance (UseCase $useCase){
 
-        return new Controller();
+        return new Controller($useCase);
     }
 
     /**

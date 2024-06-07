@@ -11,10 +11,13 @@ final class MapperDomainPersistence
 
     static function toModel( AggregateRoot $entity): Model{
         
-        $model = match($entity){
-           ($entity instanceof Customer)  =>  CustomerModel::fromEntity($entity),
+
+        $model = match(true){
+           $entity instanceof Customer  =>  CustomerModel::fromEntity($entity),
+           //TODO: Adicionar outras instancias
         };
 
+        
         return $model;
     }
 }

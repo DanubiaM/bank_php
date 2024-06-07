@@ -7,7 +7,7 @@ interface UseCaseInterface {
     public function withdraw(string $idAccount, float $amount );
     public function deposit(string $idAccount, float $amount );
     public function statement(string $idAccount);
-    public function balance(string $idAccount);
-    public function makeTransaction(string $idAccountSender, string $idAccountDestination, float $amount );
+    // public function balance(string $idAccount);
+    // public function makeTransaction(string $idAccountSender, string $idAccountDestination, float $amount );
 
 }

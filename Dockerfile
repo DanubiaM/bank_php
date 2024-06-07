@@ -37,6 +37,9 @@ RUN set -eux; \
             libonig-dev; \
     rm -rf /var/lib/apt/lists/*
 
+
+
+
 RUN set -eux; \
     # Install the PHP pdo_mysql extention
     docker-php-ext-install pdo_mysql; \
@@ -51,3 +54,6 @@ RUN set -eux; \
             --with-freetype; \
     docker-php-ext-install gd; \
     php -r 'var_dump(gd_info());'
+
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+

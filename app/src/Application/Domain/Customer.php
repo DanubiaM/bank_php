@@ -17,4 +17,38 @@ class Customer implements AggregateRoot{
         $this->phone = $phone;
         $this->address = $address;
     }
+
+  
+
+    /**
+     * Get the value of id
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get the value of name
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get the value of phone
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Get the value of address
+     */
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
 }
