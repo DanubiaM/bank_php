@@ -1,4 +1,5 @@
 <?php
+namespace Bank\Mace\Application\UseCase;
 
 class BalanceAccount{
 
