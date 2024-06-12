@@ -17,7 +17,7 @@ class UseCase implements UseCaseInterface {
     public function __construct(Repository $repository)
     {
         $this->customerRegisterAccess = new CustomerRegister($repository);
-        $this->createAccountAccess = new CreateAccount ();
+        $this->createAccountAccess = new CreateAccount ($repository);
         $this->withdrawAccess = new Withdraw();
         $this->depositAccess = new Deposit();
         $this->statementAccess = new Statement();

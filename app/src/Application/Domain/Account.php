@@ -6,15 +6,15 @@ namespace Bank\Mace\Application\Domain;
 class Account implements AggregateRoot{
 
     public string $id ;
-    public string $clientId;
+    public string $customerId;
     private float $balance = 0;
     private $history = array();
 
 
-    function __construct(string $id, string $clientId,  ?float $balance = 0){
+    function __construct(string $id, string $customerId,  ?float $balance = 0){
 
         $this->id = $id;
-        $this->clientId = $clientId;
+        $this->customerId = $customerId;
         $this->balance = $balance;
         
     }
@@ -23,8 +23,8 @@ class Account implements AggregateRoot{
 
         $this->balance += $amount;
 
-        array_push($this->history, ACTION::DEPOSIT->value ." [$amount]");
-
+        array_push($this->history,  ["action" =>ACTION::DEPOSIT->value,
+                                     "value" => $amount]);
 
     }
 
@@ -38,7 +38,8 @@ class Account implements AggregateRoot{
     
         $this->balance-=$amount;
 
-        array_push($this->history,  ACTION::WITHDRAWL->value ." [$amount]");
+        array_push($this->history,  ["action" => ACTION::WITHDRAWL->value,
+                                    "value" => $amount]);
     
 
     }
@@ -51,4 +52,38 @@ class Account implements AggregateRoot{
          return $this->history;
     }
     
+
+    /**
+     * Get the value of id
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get the value of customerId
+     */
+    public function getCustomerId(): string
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * Set the value of balance
+     */
+    public function setBalance(float $balance): self
+    {
+        $this->balance = $balance;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of history
+     */
+    public function getHistory()
+    {
+        return $this->history;
+    }
 }

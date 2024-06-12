@@ -3,26 +3,28 @@
 namespace Bank\Mace\Application\UseCase;
 
 use Bank\Mace\Application\Domain\Account;
+use Bank\Mace\Application\Ports\Repository;
 use Ramsey\Uuid\Uuid;
-
 
 class CreateAccount{
 
+    private $repository;
 
-    public function __construct()
+    public function __construct(Repository $repository)
     {
-        //TODO: call repository
+        $this->repository = $repository;
+
     }
 
 
     public function execute(string $idcustomer){
 
-        //check if customer exists
+        //TODO: check if customer exists
+    
 
         $account = new Account(Uuid::uuid4()->toString(), $idcustomer);
 
-    
-        //TODO : SAVE IN DATABASE OR FAKEDATABASE
+        $this->repository->save($account);
     }
 
 }

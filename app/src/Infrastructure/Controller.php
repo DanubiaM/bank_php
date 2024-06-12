@@ -28,7 +28,7 @@ class Controller {
         $json= $request->getBody();
         $data = json_decode($json, true); 
 
-
+        $this->usecase->createAccount($data['idCustomer']);
 
         $response->getBody()->write("Account Registered");
 

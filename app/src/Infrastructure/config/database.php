@@ -1,6 +1,7 @@
 <?php
 namespace Bank\Mace\Infrastructure\Config;
 
+use Bank\Mace\Infrastructure\Model\AccountModel;
 use Bank\Mace\Infrastructure\Model\CustomerModel;
 use DI\Container;
 use Doctrine\DBAL\DriverManager;
@@ -31,9 +32,9 @@ $container->set('entityManager', static function (Container $c): EntityManager {
 
     $em = new EntityManager($connection, $config);
 
-    // $schemaTool = new SchemaTool($em);
+    //  $schemaTool = new SchemaTool($em);
 
-    // $schemaTool->createSchema([$em->getClassMetadata(CustomerModel::class)]);
+    //  $schemaTool->createSchema([$em->getClassMetadata(CustomerModel::class)]);
 
     return  $em;
 
