@@ -11,11 +11,12 @@ class Account implements AggregateRoot{
     private $history = array();
 
 
-    function __construct(string $id, string $customerId,  ?float $balance = 0){
+    function __construct(string $id, string $customerId,  ?float $balance = 0, array $history){
 
         $this->id = $id;
         $this->customerId = $customerId;
         $this->balance = $balance;
+        $this->history = $history;
         
     }
 
@@ -69,15 +70,7 @@ class Account implements AggregateRoot{
         return $this->customerId;
     }
 
-    /**
-     * Set the value of balance
-     */
-    public function setBalance(float $balance): self
-    {
-        $this->balance = $balance;
 
-        return $this;
-    }
 
     /**
      * Get the value of history
@@ -85,5 +78,13 @@ class Account implements AggregateRoot{
     public function getHistory()
     {
         return $this->history;
+    }
+
+    /**
+     * Get the value of balance
+     */
+    public function getBalance(): float
+    {
+        return $this->balance;
     }
 }

@@ -2,6 +2,7 @@
 namespace Bank\Mace\Infrastructure\Model;
 
 use Bank\Mace\Application\Domain\AggregateRoot;
+use Bank\Mace\Infrastructure\Model\Mapper\CustomerMapper;
 use DateTime;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\CustomIdGenerator;
@@ -14,6 +15,8 @@ use Ramsey\Uuid\Rfc4122\UuidInterface;
 
 #[Entity, Table(name:'customer')]
 final class CustomerModel implements Model{
+
+    use CustomerMapper;
 
     /**
      * @var UuidInterface|null The id
@@ -44,11 +47,6 @@ final class CustomerModel implements Model{
     }
 
  
-    public static function fromEntity(AggregateRoot $entity){ 
-        
-        return new self($entity->getName(), $entity->getPhone(), $entity->getAddress());
-
-    }
 
     /**
      * Get the value of address

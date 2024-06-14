@@ -23,4 +23,16 @@ final class MapperDomainPersistence
         
         return $model;
     }
+    static function toDomain( Model $entity): AggregateRoot{
+        
+
+        $domain = match(true){
+           $entity instanceof CustomerModel  =>  CustomerModel::toDomain($entity),
+           $entity instanceof AccountModel => AccountModel::toDomain($entity)
+           //TODO: Adicionar outras instancias
+        };
+
+        
+        return $domain;
+    }
 }

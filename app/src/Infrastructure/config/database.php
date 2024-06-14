@@ -34,7 +34,7 @@ $container->set('entityManager', static function (Container $c): EntityManager {
 
     //  $schemaTool = new SchemaTool($em);
 
-    //  $schemaTool->createSchema([$em->getClassMetadata(CustomerModel::class)]);
+    //  $schemaTool->createSchema([$em->getClassMetadata(AccountModel::class)]);
 
     return  $em;
 
