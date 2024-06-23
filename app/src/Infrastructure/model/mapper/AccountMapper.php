@@ -10,13 +10,13 @@ trait AccountMapper{
 
     public static function fromEntity(AggregateRoot $model){ 
         
-        return new self($model->getCustomerId(), $model->getBalance(), $model->getHistory());
+        return new self($model->getId(),$model->getCustomerId(), $model->getBalance(), $model->getHistory());
 
     }
 
-    public static function toDomain(Model $entity){ 
+    public function toDomain(){ 
         
-        return new Account($entity->getId(), $entity->getCustomerId(), $entity->getBalance(), $entity->getHistory());
+        return new Account( $this->getId(),  $this->getCustomerId(),  $this->getBalance(), $this->getHistory());
 
     }
 }

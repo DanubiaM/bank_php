@@ -20,10 +20,10 @@ class CreateAccount{
 
     public function execute(string $idcustomer){
 
-        if($this->repository->get('Account', $idcustomer) == null){throw new Exception("Não existe cliente");};//TODO: Exepcetion: not found
+        if($this->repository->get("Customer", $idcustomer) == null){throw new Exception("Não existe cliente");};
     
 
-        $account = new Account(Uuid::uuid4()->toString(), $idcustomer);
+        $account = new Account(Uuid::uuid4()->toString(), $idcustomer, 0 , array());
 
         $this->repository->save($account);
     }

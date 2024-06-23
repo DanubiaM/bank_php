@@ -11,8 +11,8 @@ class Customer implements AggregateRoot{
     private string $phone;
     private string $address;
 
-    public function __construct(string $name, string $phone, string $address) {
-        $this->id = Uuid::uuid4()->toString();
+    public function __construct(string $id ,string $name, string $phone, string $address) {
+        $this->id = $id;
         $this->name = $name;
         $this->phone = $phone;
         $this->address = $address;

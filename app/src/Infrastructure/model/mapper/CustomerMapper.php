@@ -9,20 +9,20 @@ trait CustomerMapper{
 
     public static function fromEntity(AggregateRoot $model){ 
         
-        return new self($model->getName(), $model->getPhone(), $model->getAddress());
+        return new self($model->getId(), $model->getName(), $model->getPhone(), $model->getAddress());
 
     }
 
-    public static function toDomain(Model $entity){ 
-        
-        if(!isValid($entity)){return null;}
-        return new Customer($entity->getName(), $entity->getPhone(), $entity->getAddress());
+    public  function toDomain(){ 
+
+        if( !$this->isValid()){return null;}
+        return new Customer( $this->getId(), $this->getName(), $this->getPhone(), $this->getAddress());
 
     }
 
-    private function isValid($entity){
+    private  function isValid(){
 
-        return $entity->getName != null;
+        return $this->getName() != null;
         
     }
 }

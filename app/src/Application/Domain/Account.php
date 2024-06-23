@@ -1,17 +1,17 @@
 <?php
 namespace Bank\Mace\Application\Domain;
 
-
+use Exception;
 
 class Account implements AggregateRoot{
 
     public string $id ;
     public string $customerId;
-    private float $balance = 0;
+    private float $balance;
     private $history = array();
 
 
-    function __construct(string $id, string $customerId,  ?float $balance = 0, array $history){
+    function __construct(string $id, string $customerId,  float $balance, array $history){
 
         $this->id = $id;
         $this->customerId = $customerId;
@@ -32,8 +32,7 @@ class Account implements AggregateRoot{
     function withdrawal(float $amount){
 
         if($amount > $this->balance){
-            echo("Balance account [$this->balance] is smaller than $amount");
-            exit;
+            throw new Exception("Balance account [$this->balance] is smaller than $amount");
         }
     
     

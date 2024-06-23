@@ -18,8 +18,8 @@ class UseCase implements UseCaseInterface {
     {
         $this->customerRegisterAccess = new CustomerRegister($repository);
         $this->createAccountAccess = new CreateAccount ($repository);
-        $this->withdrawAccess = new Withdraw();
-        $this->depositAccess = new Deposit();
+        $this->withdrawAccess = new Withdraw($repository);
+        $this->depositAccess = new Deposit($repository);
         $this->statementAccess = new Statement();
     }
 

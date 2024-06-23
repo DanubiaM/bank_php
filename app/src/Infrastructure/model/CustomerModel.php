@@ -37,8 +37,9 @@ final class CustomerModel implements Model{
     private DateTime $createdAt;
 
 
-    function __construct(string $name, string $phone,string $address)
+    function __construct(string $id, string $name, string $phone,string $address)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->phone = $phone;
         $this->address = $address;
@@ -75,7 +76,7 @@ final class CustomerModel implements Model{
     /**
      * Get the value of id
      */
-    public function getId(): ?UuidInterface
+    public function getId(): string
     {
         return $this->id;
     }

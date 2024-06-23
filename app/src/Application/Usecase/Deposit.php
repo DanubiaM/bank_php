@@ -1,19 +1,26 @@
 <?php
 namespace Bank\Mace\Application\UseCase;
 
+use Bank\Mace\Application\Ports\Repository;
+
 class Deposit{
     
-    public function __construct()
+    private $repository;
+
+    public function __construct(Repository $repository)
     {
-        //TODO: call repository
+        $this->repository = $repository;
     }
 
 
     public function execute(string $idAccount, float $amount){
 
-        // GET ACCOUNT BY REPOSITORY
-        // CALL FUNCTION TO deposit
-        // SAVE IN DATABASE
-        
+       // GET ACCOUNT BY REPOSITORY
+       $account = $this->repository->get("Account", $idAccount);
+
+       $account->deposit($amount);
+       
+       $this->repository->save($account);
+      
     }
 }

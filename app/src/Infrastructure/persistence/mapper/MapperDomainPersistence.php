@@ -27,8 +27,8 @@ final class MapperDomainPersistence
         
 
         $domain = match(true){
-           $entity instanceof CustomerModel  =>  CustomerModel::toDomain($entity),
-           $entity instanceof AccountModel => AccountModel::toDomain($entity)
+           $entity instanceof CustomerModel  =>   $entity->toDomain(),
+           $entity instanceof AccountModel => $entity->toDomain()
            //TODO: Adicionar outras instancias
         };
 

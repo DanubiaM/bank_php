@@ -1,19 +1,28 @@
 <?php
 namespace Bank\Mace\Application\UseCase;
 
+use Bank\Mace\Application\Domain\Account;
+use Bank\Mace\Application\Ports\Repository;
+
 class Withdraw{
     
-    public function __construct()
+    private $repository;
+
+    public function __construct(Repository $repository)
     {
-        //TODO: call repository
+        $this->repository = $repository;
+
     }
 
 
     public function execute(string $idAccount, float $amount){
 
-        // GET ACCOUNT BY REPOSITORY
-        // CALL FUNCTION TO WITHDRAW
-        // SAVE IN DATABASE
+        $account = $this->repository->get("Account", $idAccount);
+
+        $account->withdrawal($amount);
+        
+        $this->repository->save($account);
+       
         
     }
 }

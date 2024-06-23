@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManager;
 
 class RepositoryAdapter implements Repository{
 
+    const PATH_MODEL = 'Bank\Mace\Infrastructure\Model\\';
     private EntityManager $entityManager;
 
     public function __construct(EntityManager $em )
@@ -19,13 +20,15 @@ class RepositoryAdapter implements Repository{
 
         $modelToPersiste= MapperDomainPersistence::toModel($entity);
 
-        $this->entityManager->persist($modelToPersiste);
+        echo $this->entityManager->contains($modelToPersiste);
+
+        $this->entityManager->persist($modelToPersiste); //TODO: 
         $this->entityManager->flush();
 
     }
-    public function get(string $nameModel, string $id): AggregateRoot{
+    public function get(string $nameDomain, string $id): ?AggregateRoot{
 
-        $path = sprintf('Bank\Mace\Infrastructure\Model\%sModel',$nameModel);
+        $path = sprintf(self::PATH_MODEL.$nameDomain.'Model');
         $model =  $this->entityManager->find($path, $id);
 
         $domain = null;

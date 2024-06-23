@@ -33,8 +33,9 @@ final class AccountModel implements Model{
     #[Column(name: 'history', type: 'json', length: 60, nullable: false)]
     public $history;
 
-    function __construct(string $customerId, float $balance,array $history)
+    function __construct(string $id,string $customerId, float $balance,array $history)
     {
+        $this->id = $id;
         $this->customerId = $customerId;
         $this->balance = $balance;
         $this->history = $history; //TODO: Talvez precise de fazer parce para tipo json   

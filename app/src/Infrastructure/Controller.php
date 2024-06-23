@@ -59,7 +59,7 @@ class Controller {
         $data = json_decode($json, true); 
 
      
-        $this->usecase->withdraw($data['idAccount'],$data['amount']);
+        $this->usecase->withdraw($data['idAccount'], $data['amount']);
 
         $response->getBody()->write("Sucessful withdraw");
         
