@@ -1,5 +1,5 @@
 <?php
-namespace Bank\Mace\Infrastructure;
+namespace Bank\Mace\Infrastructure\Http;
 
 use Bank\Mace\Application\Domain\Account;
 use Ramsey\Uuid\Uuid;

@@ -4,38 +4,44 @@ namespace Bank\Mace\Infrastructure\Persistence;
 use Bank\Mace\Application\Domain\AggregateRoot;
 use Bank\Mace\Application\Ports\Repository;
 use Bank\Mace\Infrastructure\Persistence\Mapper\MapperDomainPersistence;
-use Doctrine\ORM\EntityManager;
 
 class RepositoryAdapter implements Repository{
 
-    const PATH_MODEL = 'Bank\Mace\Infrastructure\Model\\';
-    private EntityManager $entityManager;
+    private DatabaseConnection $connectionDB;
 
-    public function __construct(EntityManager $em )
+
+    public function __construct(DatabaseConnection $conn )
     {
-        $this->entityManager= $em;
+        $this->connectionDB= $conn;
     }
 
     public function save(AggregateRoot $entity):void{
+        $queryBuilder = $this->connectionDB->createQueryBuilder();
 
-        $modelToPersiste= MapperDomainPersistence::toModel($entity);
+        $snapshot = MapperDomainPersistence::toModel($entity);
 
-        echo $this->entityManager->contains($modelToPersiste);
+        $queryBuilder->insert('customer')->values($snapshot);
 
-        $this->entityManager->persist($modelToPersiste); //TODO: 
-        $this->entityManager->flush();
+        $sql = $queryBuilder->getSQL();
+        $this->connectionDB->executeQuery($sql);
 
     }
     public function get(string $nameDomain, string $id): ?AggregateRoot{
 
-        $path = sprintf(self::PATH_MODEL.$nameDomain.'Model');
-        $model =  $this->entityManager->find($path, $id);
-
         $domain = null;
-        if($model != null){
-            $domain = MapperDomainPersistence::toDomain($model);
-        }
+  
+        $queryBuilder = $this->connectionDB->createQueryBuilder();
 
+        $queryBuilder->select('x.*')
+                     ->from($nameDomain,'x')
+                     ->where('x.id = :identifier')
+                     ->setParameter('identifier', $id);
+
+        $sql = $queryBuilder->getSQL();
+        $stmt =$this->connectionDB->executeQuery($sql);
+        $result = $stmt->fetchOne();
+
+        
         return $domain;
     }
 }

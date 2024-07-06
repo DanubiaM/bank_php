@@ -1,33 +1,23 @@
 <?php
 
 use Bank\Mace\Application\UseCase\UseCase;
+use Bank\Mace\Infrastructure\Persistence\DatabaseConnection;
 use Bank\Mace\Infrastructure\Persistence\RepositoryAdapter;
 use Slim\Factory\AppFactory;
 use DI\Container;
+use DI\ContainerBuilder;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/Infrastructure/config/settings.php';
+$settings = require __DIR__ . '/../src/Infrastructure/config/settings.php';
 
-$container = new Container($settings);
-$container->set('settings', $settings);
+$containerBuild = new ContainerBuilder();
+$containerBuild->addDefinitions($settings);
+$container = $containerBuild->build();
 
 AppFactory::setContainer($container);
+
 $app = AppFactory::create();
-
-require __DIR__ . '/../src/Infrastructure/config/database.php';
-
-$container->set('useCase', function(Container $c):UseCase{
-
-    $entityManager = $c->get('entityManager');
-    $adapter = new RepositoryAdapter($entityManager);
-
-    return new UseCase($adapter);
-});
-
 require __DIR__ . '/../src/Infrastructure/config/routes.php';
 
-
-
-
-
 $app->run();
+

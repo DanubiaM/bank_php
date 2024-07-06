@@ -7,21 +7,23 @@ use Bank\Mace\Application\Domain\Customer;
 use Bank\Mace\Infrastructure\Model\AccountModel;
 use Bank\Mace\Infrastructure\Model\CustomerModel;
 use Bank\Mace\Infrastructure\Model\Model;
+use Bank\Mace\Infrastructure\Persistence\Snapshot\AccountSnapshot;
+use Bank\Mace\Infrastructure\Persistence\Snapshot\CustomerSnapshot;
 
 final class MapperDomainPersistence
 {
 
-    static function toModel( AggregateRoot $entity): Model{
+    static function toModel( AggregateRoot $entity):array{
         
 
-        $model = match(true){
-           $entity instanceof Customer  =>  CustomerModel::fromEntity($entity),
-           $entity instanceof Account => AccountModel::fromEntity($entity)
+        $snapshot = match(true){
+           $entity instanceof Customer  => CustomerSnapshot::snapshot($entity),
+           $entity instanceof Account => AccountSnapshot::snapshot($entity)
            //TODO: Adicionar outras instancias
         };
 
         
-        return $model;
+        return $snapshot;
     }
     static function toDomain( Model $entity): AggregateRoot{
         
