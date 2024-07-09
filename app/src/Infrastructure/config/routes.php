@@ -13,7 +13,8 @@ $app->get('/', function ( $request,  $response, $args) {
 $app->post('/customer', function ($req, $res,$args) {
     return Controller::instance( $this->get(UseCase::class))->customerRegister($req, $res,$args);
 });
-$app->post('/account', function ($req, $res, $args) {return Controller::instance( $this->get(UseCase::class))->createAccount($req, $res,$args);});
+$app->post('/account', function ($req, $res, $args) {
+    return Controller::instance( $this->get(UseCase::class))->createAccount($req, $res,$args);});
 $app->post('/withdraw', function ($req, $res, $args) {return Controller::instance( $this->get(UseCase::class))->withdraw($req, $res,$args);});
 $app->post('/deposit', function ($req, $res, $args) {return Controller::instance( $this->get(UseCase::class))->deposit($req, $res,$args);});
 $app->get('/statement/$idAccount', function ($req, $res, $args) {return Controller::instance( $this->get(UseCase::class))->statement($req, $res,$args);});

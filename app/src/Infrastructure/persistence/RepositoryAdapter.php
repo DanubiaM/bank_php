@@ -28,20 +28,20 @@ class RepositoryAdapter implements Repository{
     }
     public function get(string $nameDomain, string $id): ?AggregateRoot{
 
-        $domain = null;
+        
   
         $queryBuilder = $this->connectionDB->createQueryBuilder();
 
         $queryBuilder->select('x.*')
                      ->from($nameDomain,'x')
-                     ->where('x.id = :identifier')
-                     ->setParameter('identifier', $id);
-
+                     ->where('x.id = :identifier');
         $sql = $queryBuilder->getSQL();
-        $stmt =$this->connectionDB->executeQuery($sql);
-        $result = $stmt->fetchOne();
+        $stmt =$this->connectionDB->executeQuery($sql, ['identifier' => $id]);
 
-        
+        $result = $stmt->fetchAssociative();
+
+        $domain = MapperDomainPersistence::toDomain($result, $nameDomain);
+
         return $domain;
     }
 }

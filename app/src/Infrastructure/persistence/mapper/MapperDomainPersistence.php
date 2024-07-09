@@ -19,21 +19,23 @@ final class MapperDomainPersistence
         $snapshot = match(true){
            $entity instanceof Customer  => CustomerSnapshot::snapshot($entity),
            $entity instanceof Account => AccountSnapshot::snapshot($entity)
-           //TODO: Adicionar outras instancias
         };
 
         
         return $snapshot;
     }
-    static function toDomain( Model $entity): AggregateRoot{
+    static function toDomain( array $resultQuery, $entity): AggregateRoot{
         
 
-        $domain = match(true){
-           $entity instanceof CustomerModel  =>   $entity->toDomain(),
-           $entity instanceof AccountModel => $entity->toDomain()
-           //TODO: Adicionar outras instancias
+        var_dump($entity);
+        var_dump(Customer::class);
+
+        $domain = match($entity){
+           'Customer' =>   new Customer($resultQuery['id'],$resultQuery['name'],$resultQuery['phone'],$resultQuery['address']),
+           'Account' => new Account($resultQuery['id'],$resultQuery['customerId'],$resultQuery['balance'],$resultQuery['history'])
         };
 
+        //  new Customer($resultQuery['id'],$resultQuery['name'],$resultQuery['phone'],$resultQuery['address'])
         
         return $domain;
     }
