@@ -18,9 +18,9 @@ class RepositoryAdapter implements Repository{
     public function save(AggregateRoot $entity):void{
         $queryBuilder = $this->connectionDB->createQueryBuilder();
 
-        $snapshot = MapperDomainPersistence::toModel($entity);
+        $persistence = MapperDomainPersistence::toModel($entity);
 
-        $queryBuilder->insert('customer')->values($snapshot);
+        $queryBuilder->insert('customer')->values($persistence->snapshot());
 
         $sql = $queryBuilder->getSQL();
         $this->connectionDB->executeQuery($sql);
@@ -43,5 +43,14 @@ class RepositoryAdapter implements Repository{
         $domain = MapperDomainPersistence::toDomain($result, $nameDomain);
 
         return $domain;
+    }
+
+    public function update(AggregateRoot $entity):void{
+        $queryBuilder = $this->connectionDB->createQueryBuilder();
+
+        $persistence = MapperDomainPersistence::toModel($entity); //TODO: REVER NOMES  
+
+        $queryBuilder->update($entity::class)->values($persistence->update());
+        
     }
 }

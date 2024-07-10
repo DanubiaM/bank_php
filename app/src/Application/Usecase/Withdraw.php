@@ -21,7 +21,7 @@ class Withdraw{
 
         $account->withdrawal($amount);
         
-        $this->repository->save($account);
+        $this->repository->update($account);
        
         
     }
