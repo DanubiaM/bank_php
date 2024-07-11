@@ -4,6 +4,8 @@ namespace Bank\Mace\Infrastructure\Persistence;
 use Bank\Mace\Application\Domain\AggregateRoot;
 use Bank\Mace\Application\Ports\Repository;
 use Bank\Mace\Infrastructure\Persistence\Mapper\MapperDomainPersistence;
+use Reflection;
+use ReflectionClass;
 
 class RepositoryAdapter implements Repository{
 
@@ -49,8 +51,8 @@ class RepositoryAdapter implements Repository{
         $queryBuilder = $this->connectionDB->createQueryBuilder();
 
         $persistence = MapperDomainPersistence::toModel($entity); //TODO: REVER NOMES  
-
-        $queryBuilder->update($entity::class)->values($persistence->update());
+        $table = (new ReflectionClass($entity))->getShortName();
+        $queryBuilder->update($table)->values($persistence->update()); //NAO DEVE SER VALUES E SIM SET, REVER
         
     }
 }

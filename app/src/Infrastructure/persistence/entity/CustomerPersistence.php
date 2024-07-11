@@ -1,6 +1,6 @@
 <?php
 
-namespace Bank\Mace\Infrastructure\Persistence\Snapshot;
+namespace Bank\Mace\Infrastructure\Persistence\Entity;
 
 use Bank\Mace\Application\Domain\Customer;
 use Bank\Mace\Infrastructure\Persistence\Enitty\Persistence;
