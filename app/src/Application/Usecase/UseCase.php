@@ -1,9 +1,7 @@
 <?php
 namespace Bank\Mace\Application\UseCase;
 
-use BalanceAccount;
 use Bank\Mace\Application\Ports\Repository;
-use MakeTransaction;
 
 class UseCase implements UseCaseInterface {    
     

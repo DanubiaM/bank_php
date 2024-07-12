@@ -2,7 +2,10 @@
 namespace Bank\Mace\Infrastructure\Config;
 
 use Bank\Mace\Application\UseCase\UseCase;
+use Bank\Mace\Infrastructure\Persistence\DAO\AccountDAO;
+use Bank\Mace\Infrastructure\Persistence\DAO\CustomerDAO;
 use Bank\Mace\Infrastructure\Persistence\DatabaseConnection;
+use Bank\Mace\Infrastructure\Persistence\PersistenceDAO;
 use Bank\Mace\Infrastructure\Persistence\RepositoryAdapter;
 use DI\Container;
 use Doctrine\DBAL\DriverManager;
@@ -21,8 +24,17 @@ return  [
         $adapter = new RepositoryAdapter($connectiondb);
 
         return new UseCase($adapter);
-    }
+    },
 
+    PersistenceDAO::class => function(Container $c) {
+        $connectiondb = $c->get(DatabaseConnection::class);
+
+        $accountdao = new AccountDAO($connectiondb);        
+        $customerdao = new CustomerDAO($connectiondb);
+
+        return new PersistenceDAO($accountdao, $customerdao);
+    },
+    
 
 ];
 
