@@ -1,17 +1,23 @@
 <?php
 namespace Bank\Mace\Application\UseCase;
 
+use Bank\Mace\Application\Ports\Repository;
+
 class BalanceAccount{
 
-    public function __construct()
+
+    private $repository;
+
+    public function __construct(Repository $repository)
     {
-        //TODO: call repository
+        $this->repository = $repository;
+
     }
 
 
-    public function execute(string $idAccount){
-        // GET ACCOUNT BY REPOSITORY
-        // CALL FUNCTION TO SHOW BALANCEs
-        // SAVE IN DATABASE
+    public function execute(string $idAccount):float{
+        $account = $this->repository->get("Account", $idAccount);
+
+        return $account->showBalance(); 
     }
 }

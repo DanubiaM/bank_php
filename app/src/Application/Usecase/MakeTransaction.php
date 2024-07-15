@@ -1,17 +1,30 @@
-<?php 
+<?php
+
+namespace Bank\Mace\Application\UseCase;
+use Bank\Mace\Application\Ports\Repository;
 
 class MakeTransaction{
 
-    public function __construct()
+    private $repository;
+
+    public function __construct(Repository $repository)
     {
-        //TODO: call repository
+        $this->repository = $repository;
+
     }
 
 
+
     public function execute(string $idAccountSender, string $idAccountDestination, float $amount){
-      // GET ACCOUNT A AND B BY REPOSITORY
-        // INSTANCE TRANSACTION
-        // SAVE IN DATABASE
+
+        $accountSender = $this->repository->get("Account", $idAccountSender);
+        $accountDestination = $this->repository->get("Account", $idAccountDestination);
+
+        $accountSender->withdrawal($amount);
+        $accountDestination->deposit($amount);
+
+        $this->repository->update($accountSender);        
+        $this->repository->update($accountDestination);
     
     }
 }

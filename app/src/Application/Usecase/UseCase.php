@@ -2,7 +2,6 @@
 namespace Bank\Mace\Application\UseCase;
 
 use Bank\Mace\Application\Ports\Repository;
-
 class UseCase implements UseCaseInterface {    
     
     private $customerRegisterAccess;
@@ -10,6 +9,8 @@ class UseCase implements UseCaseInterface {
     private $withdrawAccess;
     private $depositAccess;
     private $statementAccess;
+    private $balance;
+    private $transaction;
 
 
     public function __construct(Repository $repository)
@@ -18,7 +19,10 @@ class UseCase implements UseCaseInterface {
         $this->createAccountAccess = new CreateAccount ($repository);
         $this->withdrawAccess = new Withdraw($repository);
         $this->depositAccess = new Deposit($repository);
-        $this->statementAccess = new Statement();
+        $this->statementAccess = new Statement($repository);
+        $this->balance = new BalanceAccount($repository);
+        $this->transaction = new MakeTransaction($repository);
+
     }
 
     public function customerRegister(string $name, string $phone, string $address){               
@@ -40,8 +44,15 @@ class UseCase implements UseCaseInterface {
         return $this->depositAccess->execute($idAccount,$amount);
 
     }
-    public function statement(string $idAccount){
+    public function statement(string $idAccount):array{
         return $this->statementAccess->execute($idAccount);
     }
 
+    public function balance(string $idAccount):float{
+        return $this->balance->execute($idAccount);
+    }
+
+    public function makeTransaction(string $idAccountSender, string $idAccountDestination, float $amount){
+        return $this->transaction->execute($idAccountSender, $idAccountDestination, $amount);
+    }
 }

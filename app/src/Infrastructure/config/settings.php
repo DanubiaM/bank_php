@@ -15,16 +15,8 @@ return  [
     DatabaseConnection::class => static fn() => DriverManager::getConnection([
         'wrapperClass'=>DatabaseConnection::class,
         'driver'=>'sqlite3',
-        'path'=> __DIR__ . '/var/database.sqlite'
+        'path'=> __DIR__ . '/data/database.sqlite'
     ]),
-
-    UseCase::class => function(Container $c) {
-        $connectiondb = $c->get(DatabaseConnection::class);
-
-        $adapter = new RepositoryAdapter($connectiondb);
-
-        return new UseCase($adapter);
-    },
 
     PersistenceDAO::class => function(Container $c) {
         $connectiondb = $c->get(DatabaseConnection::class);
@@ -34,6 +26,16 @@ return  [
 
         return new PersistenceDAO($accountdao, $customerdao);
     },
+
+    UseCase::class => function(Container $c) {
+        $persistence = $c->get(PersistenceDAO::class);
+
+        $adapter = new RepositoryAdapter($persistence);
+
+        return new UseCase($adapter);
+    },
+
+    
     
 
 ];

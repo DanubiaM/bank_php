@@ -75,11 +75,6 @@ class Controller {
         $json= $request->getBody();
         $data = json_decode($json, true); 
 
-        // GET ACCOUNT BY REPOSITORY
-        // CALL FUNCTION TO deposit
-        // SAVE IN DATABASE
-        
-
         $this->usecase->deposit($data['idAccount'],$data['amount']);
 
         $response->getBody()->write("Sucessful deposit");
@@ -92,15 +87,13 @@ class Controller {
      */
     public function statement($request,$response, $args){
 
-        $idAccount = $args["idAccount"];
+        $idAccount =  $request->getAttribute('idAccount');
 
+        $history = $this->usecase->statement($idAccount);
         
-        $this->usecase->statement($idAccount);
+        $response->getBody()->write(json_encode($history,true));
 
-
-        $response->getBody()->write("Sucessful deposit");
-        
-        return $response;
+        return $response->withHeader('Content-type', 'application/json')->withStatus(200);
     }
 
      /**
@@ -110,12 +103,11 @@ class Controller {
 
         $idAccount = $args["idAccount"];
        
-        $this->usecase->balance($idAccount);
-
-
-        $response->getBody()->write("Sucessful deposit");
+        $balance = $this->usecase->balance($idAccount);
         
-        return $response;
+        $response->getBody()->write(json_encode($balance,true));
+
+        return $response->withHeader('Content-type', 'application/json')->withStatus(200);
     }
 
     /**

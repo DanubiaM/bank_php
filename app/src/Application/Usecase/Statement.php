@@ -1,18 +1,22 @@
 <?php
 namespace Bank\Mace\Application\UseCase;
 
+use Bank\Mace\Application\Ports\Repository;
+
 class Statement{
     
-    public function __construct()
+    private $repository;
+
+    public function __construct(Repository $repository)
     {
-        //TODO: call repository
+        $this->repository = $repository;
+
     }
 
+    public function execute(string $idAccount):array{
 
-    public function execute(string $idAccount){
+        $account = $this->repository->get("Account", $idAccount);
 
-            // GET ACCOUNT BY REPOSITORY
-        // CALL FUNCTION GET ALL STATEMENT
-        // SAVE IN DATABASE
+        return $account->showExtract();
     }
 }

@@ -15,12 +15,11 @@ class Deposit{
 
     public function execute(string $idAccount, float $amount){
 
-       // GET ACCOUNT BY REPOSITORY
        $account = $this->repository->get("Account", $idAccount);
 
        $account->deposit($amount);
        
-       $this->repository->save($account);
+       $this->repository->update($account);
       
     }
 }

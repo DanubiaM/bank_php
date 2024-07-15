@@ -21,10 +21,10 @@ final class PersistenceDAO
 
     function save(AggregateRoot $entity){
 
-        $snapshot = match(true){
+        match(true){
             $entity instanceof Customer  =>  $this->persistCustomerDAO->save($entity),
             $entity instanceof Account => $this->persistAccountDAO->save($entity)
-         };
+        };
 
     }
 
@@ -40,10 +40,10 @@ final class PersistenceDAO
     
     function update(AggregateRoot $entity){
 
-        $snapshot = match(true){
+        match(true){
             $entity instanceof Customer  => $this->persistCustomerDAO->update($entity),
-            $entity instanceof Account => $this->persistAccountDAO->ipdate($entity)
-         };
+            $entity instanceof Account => $this->persistAccountDAO->update($entity)
+        };
 
     }
 }

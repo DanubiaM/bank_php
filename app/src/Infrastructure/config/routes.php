@@ -22,10 +22,10 @@ $app->post('/withdraw', function ($req, $res, $args) {
 $app->post('/deposit', function ($req, $res, $args) {
     return Controller::instance( $this->get(UseCase::class))->deposit($req, $res,$args);
 });
-$app->get('/statement/$idAccount', function ($req, $res, $args) {
+$app->get('/statement/{idAccount}', function ($req, $res, $args) {
     return Controller::instance( $this->get(UseCase::class))->statement($req, $res,$args);
 });
-$app->get('/balance/$idAccount', function ($req, $res, $args) {
+$app->get('/balance/{idAccount}', function ($req, $res, $args) {
     return Controller::instance( $this->get(UseCase::class))->balance($req, $res,$args);
 });
 $app->post('/transaction', function ($req, $res, $args) {
